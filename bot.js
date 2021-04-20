@@ -23,6 +23,12 @@ client.on("message", async message => {
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
   const comando = args.shift().toLowerCase();
+
+  if(comando === "ping") {
+    const m = await message.channel.send("Ping?");
+    m.edit(`Pong! A latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${client.ws.ping}ms.`);
+  }
+
 });
 
 client.login(config.token);
