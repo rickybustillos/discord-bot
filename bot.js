@@ -38,7 +38,6 @@ client.on("message", async message => {
       api.get('https://viacep.com.br/ws/'+cep+'/json/').then(dados => {
         dados = JSON.stringify(dados, null, 2);
         m.edit('```json\n'+dados+'\n```');
-        console.log(dados);
       });
     } else {
       await message.channel.send("O cep está incorreto.");
