@@ -1,3 +1,5 @@
+const api = require("./api.js");
+
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
@@ -21,8 +23,30 @@ client.on("message", async message => {
   if(message.author.bot) return;
   if(message.channel.type === "dm") return;
 
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const comando = args.shift().toLowerCase();
+  const args = message.content.slice(config.prefix.length).split(/ +/g);
+  const comando = args[0].toLowerCase();
+
+  if(comando === "cep") {
+    var m = await message.channel.send("Verificando CEP.");
+    // Atribuindo o valor do CEP a uma variável
+    var cep = args[1];
+
+    // Removendo caracteres especiais caso tenha
+    cep = cep.replace(/[^0-9]/gi, "");
+
+    // Verificando se o CEP possui um tamanho válido
+    if (cep.length == 8) {
+      m.edit('Coletando dados desse CEP...');
+      api.get('https://viacep.com.br/ws/'+cep+'/json/').then(dados => {
+        dados = JSON.stringify(dados, null, 2);
+        m.edit('```json\n'+dados+'\n```');
+        console.log(dados);
+      });
+    } else {
+      await message.channel.send("O cep está incorreto.");
+    }
+
+  }
 
   if(comando === "ping") {
     const m = await message.channel.send("Ping?");
