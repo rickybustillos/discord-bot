@@ -47,7 +47,9 @@ client.on("message", async message => {
 
   if(comando === "ping") {
     const m = await message.channel.send("Ping?");
-    m.edit(`Pong! A latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${client.ws.ping}ms.`);
+    setTimeout(() => {
+      m.edit(`Pong! A latência é ${m.createdTimestamp - message.createdTimestamp}ms. A latência da API é ${client.ws.ping}ms.`);
+    }, 1000)
   }
 
 });
