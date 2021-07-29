@@ -3,6 +3,9 @@ const api = require("./api.js");
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
+if(process.env.NODE_ENV == 'production') {
+  config.token = process.env.SECRET_KEY
+}
 
 client.on("ready", () => {
   console.log(`Bot foi iniciado, com ${client.users.cache.size} usuários, em ${client.channels.cache.size} canais, em ${client.guilds.cache.size} servidores.`);
