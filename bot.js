@@ -9,7 +9,7 @@ if(process.env.NODE_ENV == 'production') {
 
 client.on("ready", () => {
   console.log(`Bot foi iniciado, com ${client.users.cache.size} usuários, em ${client.channels.cache.size} canais, em ${client.guilds.cache.size} servidores.`);
-  client.user.setActivity( `o Ricky pela janela`, { type: 'PLAYING' });
+  client.user.setActivity( `sonequinha zZzZz..`, { type: 'PLAYING' });
 });
 
 client.on("guildCreate", guild => {
