@@ -4,6 +4,7 @@
   "description": "Bot oficial do Social Space",
   "main": "bot.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
