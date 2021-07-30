@@ -48,6 +48,31 @@ client.on("message", async message => {
 
   }
 
+  if(comando === "github"){
+    var m = await message.channel.send("Verificando usuário...");
+    var user = args[1];
+    
+    api.get('https://api.github.com/users/'+user).then(dados => {
+      if(dados){
+
+        if(args[2] != undefined && args[2] == 'avatar'){
+          m.edit(dados.avatar_url);
+        } else {
+          dados = JSON.stringify(dados, null, 2);
+          m.delete();
+          if(dados.message !== undefined && dados.message == "Not Found"){
+            message.channel.send('```json\n'+dados+'\n```');
+          } else {
+            message.channel.send('Não consegui encontrar esse usuário do github :/');
+          }
+        }
+
+      } else {
+        m.edit('Ocorreu algum erro na solicitação.');
+      }
+    });
+  }
+
   if(comando === "ping") {
     const m = await message.channel.send("Ping?");
     setTimeout(() => {
